@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Admin\V1\ProductAdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// 後台 api
+Route::group([
+    "prefix" => "admin/v1",
+], function () {
+
+    /** 商品 */
+    Route::group([
+        "prefix" => "product",
+    ], function () {
+        Route::get('list', [ProductAdminController::class, 'index']);
+    });
 });
