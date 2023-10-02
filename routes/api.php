@@ -23,6 +23,10 @@ Route::group([
     Route::group([
         "prefix" => "product",
     ], function () {
-        Route::get('list', [ProductAdminController::class, 'index']);
+        Route::post('', [ProductAdminController::class, 'create']);
+        Route::get('{id}', [ProductAdminController::class, 'show']);
+        Route::get('', [ProductAdminController::class, 'list']);
+        Route::put('{id}', [ProductAdminController::class, 'update']);
+        Route::delete('{id}', [ProductAdminController::class, 'softDelete']);
     });
 });
