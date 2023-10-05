@@ -7,9 +7,8 @@ use App\Http\Requests\CreateProductRequest;
 
 class ProductAdminController extends AdminController
 {
-    public function list(CreateProductRequest $request)
+    public function list()
     {
-
     }
 
     public function show($id)
