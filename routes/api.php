@@ -26,7 +26,7 @@ Route::group([
         Route::post('', [ProductAdminController::class, 'create']);
         Route::get('{id}', [ProductAdminController::class, 'show']);
         Route::get('', [ProductAdminController::class, 'list']);
-        Route::put('{id}', [ProductAdminController::class, 'update']);
+        Route::put('', [ProductAdminController::class, 'update']);
         Route::delete('{id}', [ProductAdminController::class, 'softDelete']);
     });
 });

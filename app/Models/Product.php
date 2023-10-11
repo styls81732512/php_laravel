@@ -12,4 +12,19 @@ class Product extends Model
     use SoftDeletes;
 
     protected $table = 'products';
+
+    protected $fillable = [
+        'name',
+        'subTitle',
+        'type',
+        'photoSid',
+        'description',
+        'price',
+        'finalPrice',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'deleted_at',
+    ];
 }
