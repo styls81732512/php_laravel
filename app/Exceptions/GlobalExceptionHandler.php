@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use App\Traits\ApiResponseTrait; //引用特徵
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response; //引用網址不允許此動詞
@@ -55,7 +56,7 @@ class GlobalExceptionHandler extends ExceptionHandler
         # Model 找不到資料
         if ($exception instanceof ModelNotFoundException) {
             return $this->errorResponse(
-                '找不到資料',
+                '找不到指定資料',
                 Response::HTTP_NOT_FOUND
             );
         }
@@ -89,6 +90,15 @@ class GlobalExceptionHandler extends ExceptionHandler
             return $this->errorResponse(
                 $exception->getMessage(), //回傳例外內的訊息
                 $exception->getCode() //自定義statusCode
+            );
+        }
+
+        //TODO: 先自定義 500 statusCode
+        # DB Sql Exception
+        if ($exception instanceof QueryException) {
+            return $this->errorResponse(
+                $exception->getMessage(), //回傳 DB 拋出的 error message
+                500,
             );
         }
 

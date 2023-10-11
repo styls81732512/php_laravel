@@ -32,7 +32,7 @@ class Controller extends BaseController
      */
     protected function respondNoContent()
     {
-        return $this->respond(null, '00', Response::HTTP_NO_CONTENT);
+        return $this->respond(null, '00', Response::HTTP_OK);
     }
 
     protected function respondError(string $message, string $code, $statusCode)
