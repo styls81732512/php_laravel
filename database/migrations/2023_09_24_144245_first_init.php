@@ -27,6 +27,23 @@ return new class extends Migration
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->softDeletes();
         });
+
+        // 建立 用戶user
+        Schema::create('users', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('uid')->comment('用戶編號')->unique();
+            $table->string('name')->comment('名稱')->nullable();
+            $table->string('email')->comment('信箱')->unique()->nullable();
+            $table->string('password')->comment('密碼')->nullable();
+            $table->string('phoneNumber')->comment('電話號碼')->nullable();
+            $table->string('avatar')->comment('頭像')->nullable();
+            $table->integer('points')->comment('金幣餘額');
+            $table->integer('broughtTimes')->comment('購買次數');
+            $table->text('token')->comment('Token')->nullable();
+
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+        });
     }
 
     /**
@@ -34,6 +51,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('users');
         Schema::dropIfExists('products');
     }
 };
