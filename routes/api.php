@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\V1\ProductAdminController;
 use App\Http\Controllers\Admin\V1\UserAdminController;
+use App\Http\Controllers\Public\V1\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,4 +46,17 @@ Route::group([
 Route::group([
     "prefix" => "public/v1",
 ], function () {
+
+    /** auth */
+    Route::group([
+        "prefix" => "auth",
+    ], function () {
+        Route::post('register', [AuthController::class, 'register']);
+    });
+
+    /** 用戶 */
+    // Route::group([
+    //     "prefix" => "user",
+    // ], function () {
+    // });
 });
