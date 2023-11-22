@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\V1\InterviewController;
 use App\Http\Controllers\Admin\V1\ProductAdminController;
 use App\Http\Controllers\Admin\V1\UserAdminController;
-use App\Http\Controllers\Public\V1\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +40,13 @@ Route::group([
         Route::get('', [UserAdminController::class, 'list']);
         Route::put('', [UserAdminController::class, 'update']);
     });
+
+    Route::group([
+        "prefix" => "interview",
+    ], function () {
+        Route::get('exchange', [InterviewController::class, 'exchange']);
+    }
+    );
 });
 
 // 前台api
@@ -48,11 +55,11 @@ Route::group([
 ], function () {
 
     /** auth */
-    Route::group([
-        "prefix" => "auth",
-    ], function () {
-        Route::post('register', [AuthController::class, 'register']);
-    });
+    // Route::group([
+    //     "prefix" => "auth",
+    // ], function () {
+    //     Route::post('register', [AuthController::class, 'register']);
+    // });
 
     /** 用戶 */
     // Route::group([
