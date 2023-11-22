@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Admin\V1\ProductAdminController;
+use App\Http\Controllers\Admin\V1\UserAdminController;
+use App\Http\Controllers\Public\V1\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,4 +31,32 @@ Route::group([
         Route::put('', [ProductAdminController::class, 'update']);
         Route::delete('{id}', [ProductAdminController::class, 'softDelete']);
     });
+
+    /** 用戶 */
+    Route::group([
+        "prefix" => "user",
+    ], function () {
+        Route::get('{id}', [UserAdminController::class, 'show']);
+        Route::get('', [UserAdminController::class, 'list']);
+        Route::put('', [UserAdminController::class, 'update']);
+    });
+});
+
+// 前台api
+Route::group([
+    "prefix" => "public/v1",
+], function () {
+
+    /** auth */
+    Route::group([
+        "prefix" => "auth",
+    ], function () {
+        Route::post('register', [AuthController::class, 'register']);
+    });
+
+    /** 用戶 */
+    // Route::group([
+    //     "prefix" => "user",
+    // ], function () {
+    // });
 });
